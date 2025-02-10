@@ -24,7 +24,7 @@ const regsiterUserIntoDB = async (name: string, email: string, password: string)
 const loginUserIntoDB = async (email: string, password: string) => {
     const isUserExist = await User.isUserExistsByEmail(email);
     if (!isUserExist) {
-        throw new AppError("email", httpStatus.UNAUTHORIZED, 'User does not exist !!');
+        throw new AppError("email", httpStatus.NOT_FOUND, 'User does not exists !!');
     }
 
     const userStatus = isUserExist?.isBlocked;

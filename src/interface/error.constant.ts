@@ -3,5 +3,5 @@ export const errorMessage = {
     400: "Bad Request",
     401: "Invalid Credentials",
     403: "Forbidden Access",
-    404: "Not Found"
+    404: "Not Found Error",
 }

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
+import { USER_ROLE } from "./user.constant";
 
 export interface IUser {
     name: string;
@@ -12,6 +13,7 @@ export interface IUser {
 
 export interface UserModel extends Model<IUser> {
     isUserExistsByEmail(email: string): Promise<IUser>;
+    isUserExistsById(id: Types.ObjectId): Promise<IUser>;
 
     isPasswordMatched(
         plainTextPassword: string,
@@ -23,3 +25,5 @@ export interface UserModel extends Model<IUser> {
         jwtIssuedTimestamp: number,
     ): boolean;
 }
+
+export type TUserRole = keyof typeof USER_ROLE;

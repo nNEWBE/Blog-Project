@@ -17,6 +17,7 @@ const userSchema = new Schema<IUser, UserModel>({
         type: String,
         required: true,
         minlength: 4,
+        select: false,
     },
     role: {
         type: String,
@@ -41,7 +42,11 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.statics.isUserExistsByEmail = async function (email: string) {
-    return await User.findOne({ email });
+    return await User.findOne({ email }).select('+password');
+};
+
+userSchema.statics.isUserExistsById = async function (id: string) {
+    return await User.findById(id).select('+password');
 };
 
 userSchema.statics.isPasswordMatched = async function (
