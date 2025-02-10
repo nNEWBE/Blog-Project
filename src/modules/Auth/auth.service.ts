@@ -27,12 +27,6 @@ const loginUserIntoDB = async (email: string, password: string) => {
         throw new AppError("email", httpStatus.NOT_FOUND, 'User does not exists !!');
     }
 
-    const userStatus = isUserExist?.isBlocked;
-
-    if (userStatus) {
-        throw new AppError("Blocked", httpStatus.FORBIDDEN, 'This user is blocked !!');
-    }
-
     const isPasswordMatched = await User.isPasswordMatched(password, isUserExist.password);
     if (!isPasswordMatched) {
         throw new AppError("password", httpStatus.UNAUTHORIZED, 'Password does not match !!');

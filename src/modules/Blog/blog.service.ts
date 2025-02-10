@@ -2,7 +2,7 @@ import { JwtPayload } from "jsonwebtoken";
 import { IBlog } from "./blog.interface";
 import { Blog } from "./blog.model";
 import { checkBlogExist, checkBlogOwnership } from "./blog.utils";
-import QueryBuilder from "../../builder/queryBuilder";
+import QueryBuilder from "../../builder/QueryBuilder";
 
 const createBlogIntoDB = async (payload: IBlog, user: JwtPayload) => {
     await checkBlogOwnership(payload.author, user);
@@ -21,13 +21,12 @@ const deleteBlogFromDB = async (id: string, user: JwtPayload) => {
     const blog = await checkBlogExist(id);
     await checkBlogOwnership(blog.author, user);
     await Blog.findByIdAndDelete(id);
-    return ""
+    return null
 }
 
 const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
-    const blogQuery = new QueryBuilder(Blog.find()
-    .populate("author"),
-     query)
+    const blogQuery = new QueryBuilder(Blog.find().populate("author")
+     ,query)
      .search(['title', 'content'])
      .sort()
      .filter()

@@ -37,7 +37,7 @@ const deleteBlog = catchAsync(async (req, res) => {
 });
 
 const getAllBlogs = catchAsync(async (req, res) => {
-    const result = await BlogServices.getAllBlogsFromDB(req.query);
+    const result = await BlogServices.getAllBlogsFromDB(req?.query);
     sendResponse(res, {
         success: true,
         message: 'Blogs fetched successfully',

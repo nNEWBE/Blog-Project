@@ -7,11 +7,11 @@ import validateRequest from "../../middlewares/validateRequest";
 
 const router = Router();
 
-router.post('/', auth(USER_ROLE.admin, USER_ROLE.user),validateRequest(BlogValidationSchema.createBlogValidationSchema), BlogControllers.createBlog);
+router.post('/', auth(USER_ROLE.user), validateRequest(BlogValidationSchema.createBlogValidationSchema), BlogControllers.createBlog);
 
-router.patch('/:id', auth(USER_ROLE.admin, USER_ROLE.user),validateRequest(BlogValidationSchema.updateBlogValidationSchema), BlogControllers.updateBlog);
+router.patch('/:id', auth(USER_ROLE.user), validateRequest(BlogValidationSchema.updateBlogValidationSchema), BlogControllers.updateBlog);
 
-router.delete('/:id', auth(USER_ROLE.admin, USER_ROLE.user), BlogControllers.deleteBlog);
+router.delete('/:id', auth(USER_ROLE.user), BlogControllers.deleteBlog);
 
 router.get('/', BlogControllers.getAllBlogs);
 
